@@ -46,9 +46,9 @@ public class PackageController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private void deletePackage(@PathVariable Integer id)
-    {
+    private String deletePackage(@PathVariable Integer id) {
         packageRepository.delete(this.findPackageById(id));
+        return "Deleted package successfully";
     }
 
 }

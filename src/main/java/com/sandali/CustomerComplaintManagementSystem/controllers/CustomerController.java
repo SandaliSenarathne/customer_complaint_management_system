@@ -50,9 +50,10 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private void deleteCustomer(@PathVariable Integer id)
+    private String deleteCustomer(@PathVariable Integer id)
     {
         customerRepository.delete(this.findCustomerById(id));
+        return "Deleted package successfully";
     }
 
 }
