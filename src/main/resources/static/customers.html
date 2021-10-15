@@ -4,63 +4,6 @@
     <meta charset="UTF-8">
     <title>Customers</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Lato", sans-serif;
-        }
-
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-        }
-
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        .sidebar a.active {
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
-
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-        }
-
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-            .sidebar a {float: left;}
-            div.content {margin-left: 0;}
-        }
-
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
-    </style>
-
     <!-- Font Awesome -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -77,17 +20,46 @@
             rel="stylesheet"
     />
 
+    <link href="../css/styles.css" rel="stylesheet">
 </head>
 <body>
 <div class="sidebar">
     <a href="/">Home</a>
     <a href="/complaints">Complaints</a>
     <a class="active" href="/customers">Customers</a>
+    <a href="/subscriptions">Subscriptions</a>
     <a href="/packages">Packages</a>
 </div>
 
 <div class="content">
-
+    <h1>Customers</h1>
+    <div class="d-flex flex-row-reverse px-4 py-2">
+        <button type="button" class="btn btn-primary btn-lg btn-floating float-right">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+    </div>
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th class="fw-bold">Package ID</th>
+            <th class="fw-bold">Package Name</th>
+            <th class="fw-bold">Description</th>
+            <th class="fw-bold">Monthly Fee</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Master Unlimited</td>
+            <td>Get unlimited calls to any network</td>
+            <td>3500 LKR</td>
+            <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
+            <td><button type="button" class="btn btn-sm btn-outline-danger">Danger</button></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <!-- MDB -->

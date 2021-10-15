@@ -4,63 +4,6 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Lato", sans-serif;
-        }
-
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-        }
-
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        .sidebar a.active {
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
-
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-        }
-
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-            .sidebar a {float: left;}
-            div.content {margin-left: 0;}
-        }
-
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
-    </style>
-
     <!-- Font Awesome -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -77,18 +20,25 @@
             rel="stylesheet"
     />
 
+    <link href="../css/styles.css" rel="stylesheet">
 </head>
 <body>
 <div class="sidebar">
     <a class="active" href="/">Home</a>
     <a href="/complaints">Complaints</a>
     <a href="/customers">Customers</a>
+    <a href="/subscriptions">Subscriptions</a>
     <a href="/packages">Packages</a>
 </div>
 
-<div class="content">
-
+<div class="content home">
+    <div>
+        <h1>Hello!</h1>
+        <h3>Welcome to Customer Complaint Management System</h3>
+        <img src="../images/logo.png" width="300px">
+    </div>
 </div>
+<!--Logo color - #f76f73 -->
 
 <!-- MDB -->
 <script
