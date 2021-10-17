@@ -35,11 +35,9 @@ public class ComplaintController {
     }
 
     @PutMapping("/edit/{id}")
-    public String editCustomer(@PathVariable Integer id, @RequestParam Integer subscriptionId,
-                               @RequestParam String complaint, @RequestParam String solution,
-                               @RequestParam int status) {
+    public String editCustomer(@PathVariable Integer id, @RequestParam String complaint,
+                               @RequestParam String solution, @RequestParam int status) {
         Complaint c = this.findComplaintById(id);
-        c.setSubscriptionId(subscriptionId);
         c.setComplaint(complaint);
         c.setSolution(solution);
         c.setStatus(status);

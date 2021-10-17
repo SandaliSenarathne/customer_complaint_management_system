@@ -35,7 +35,11 @@
 <div class="content">
     <h1>Complaints</h1>
     <div class="d-flex flex-row-reverse px-4 py-2">
-        <button type="button" class="btn btn-primary btn-lg btn-floating float-right">
+        <button type="button"
+                data-mdb-toggle="modal"
+                data-mdb-target="#addComplaintModal"
+                class="btn btn-primary btn-lg btn-floating float-right"
+        >
             <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
     </div>
@@ -43,6 +47,7 @@
         <thead>
         <tr>
             <th class="fw-bold">Complaint ID</th>
+            <th class="fw-bold">Subscription ID</th>
             <th class="fw-bold">Customer</th>
             <th class="fw-bold">Package</th>
             <th class="fw-bold">Complaint</th>
@@ -55,16 +60,20 @@
         <tbody>
         <tr>
             <td>1</td>
+            <td>3</td>
             <td>Sandali Senarathne</td>
             <td>Data Blast</td>
             <td>My internet connection is not working</td>
             <td><span class="badge bg-danger">Pending</span></td>
             <td>Not solved yet</td>
-            <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
+            <td><button type="button" class="btn btn-sm btn-outline-success"
+                        data-mdb-toggle="modal"
+                        data-mdb-target="#editComplaintModal">Edit</button></td>
             <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
         </tr>
         <tr>
             <td>2</td>
+            <td>1</td>
             <td>Sandali Senarathne</td>
             <td>Data Blast</td>
             <td>My router is not working</td>
@@ -75,6 +84,117 @@
         </tr>
         </tbody>
     </table>
+</div>
+
+<!-- Add Modal -->
+<div
+        class="modal fade"
+        id="addComplaintModal"
+        tabindex="-1"
+        aria-labelledby="addComplaintModal"
+        aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addComplaintModalTitle">Add Complaint</h5>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-mdb-dismiss="modal"
+                        aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group mb-3">
+                        <label for="customerId">Customer</label>
+                        <select class="form-control" id="customerId">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group  mb-3">
+                        <label for="subscriptionId">Subscription</label>
+                        <select class="form-control" id="subscriptionId">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="complaint" rows="4"></textarea>
+                        <label class="form-label" for="complaint">Complaint</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Add Complaint</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div
+        class="modal fade"
+        id="editComplaintModal"
+        tabindex="-1"
+        aria-labelledby="editComplaintModal"
+        aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editComplaintModalTitle">Edit Complaint</h5>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-mdb-dismiss="modal"
+                        aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="complaintId" class="form-control" value="1" disabled/>
+                        <label class="form-label" for="complaintId">Complaint ID</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="subscriptionId2" class="form-control" value="3" disabled/>
+                        <label class="form-label" for="subscriptionId2">Subscription ID</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="customerName2" class="form-control" value="Sandali Senarathne" disabled/>
+                        <label class="form-label" for="customerName2">Customer Name</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="package2" class="form-control" value="Data Blast" disabled/>
+                        <label class="form-label" for="package2">Package</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="complaint2" rows="4"></textarea>
+                        <label class="form-label" for="complaint2">Complaint</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status">
+                            <option class="text-primary" value="0">Pending</option>
+                            <option class="text-danger" value="1">Solved</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- MDB -->
