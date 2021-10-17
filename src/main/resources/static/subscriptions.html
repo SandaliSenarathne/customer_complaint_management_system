@@ -34,7 +34,11 @@
 <div class="content">
     <h1>Subscriptions</h1>
     <div class="d-flex flex-row-reverse px-4 py-2">
-    <button type="button" class="btn btn-primary btn-lg btn-floating float-right">
+    <button type="button"
+            data-mdb-toggle="modal"
+            data-mdb-target="#addSubscriptionModal"
+            class="btn btn-primary btn-lg btn-floating float-right"
+    >
         <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
     </div>
@@ -80,6 +84,57 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<!-- Modal -->
+<div
+        class="modal fade"
+        id="addSubscriptionModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Subscription</h5>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-mdb-dismiss="modal"
+                        aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="customerId">Customer</label>
+                        <select class="form-control" id="customerId">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="packageId">Package</label>
+                        <select class="form-control" id="packageId">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Add Subscription</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- MDB -->
