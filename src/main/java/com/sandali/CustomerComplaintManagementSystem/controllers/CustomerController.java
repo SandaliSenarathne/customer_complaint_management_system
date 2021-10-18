@@ -5,8 +5,10 @@ import com.sandali.CustomerComplaintManagementSystem.repository.CustomerReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -22,6 +24,21 @@ public class CustomerController {
         return "customers";
     }
 
+    @GetMapping("/add")
+    public String viewAddCustomerPage(Model model) {
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+
+        return "add_customer";
+    }
+
+    @PostMapping("/save")
+    public String saveCustomer(@ModelAttribute("customer") Customer customer){
+        customerRepository.save(customer);
+
+        return "redirect:/customers";
+    }
+
     @GetMapping("/list")
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
@@ -32,19 +49,19 @@ public class CustomerController {
         return customerRepository.findCustomerById(id);
     }
 
-    @PostMapping("/add")
-    public String addCustomer(@RequestParam String firstName,
-                              @RequestParam String lastName, @RequestParam String nic,
-                              @RequestParam String phone, @RequestParam String email) {
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setNic(nic);
-        customer.setPhone(phone);
-        customer.setEmail(email);
-        customerRepository.save(customer);
-        return "Added new customer successfully";
-    }
+//    @PostMapping("/add")
+//    public String addCustomer(@RequestParam String firstName,
+//                              @RequestParam String lastName, @RequestParam String nic,
+//                              @RequestParam String phone, @RequestParam String email) {
+//        Customer customer = new Customer();
+//        customer.setFirstName(firstName);
+//        customer.setLastName(lastName);
+//        customer.setNic(nic);
+//        customer.setPhone(phone);
+//        customer.setEmail(email);
+//        customerRepository.save(customer);
+//        return "Added new customer successfully";
+//    }
 
     @PutMapping("/edit/{id}")
     public String editCustomer(@PathVariable Integer id, @RequestParam String firstName,

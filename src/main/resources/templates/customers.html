@@ -34,10 +34,7 @@
 <div class="content">
     <h1>Customers</h1>
     <div class="d-flex flex-row-reverse px-4 py-2">
-        <button type="button"
-                data-mdb-toggle="modal"
-                data-mdb-target="#addCustomerModal"
-                class="btn btn-primary btn-lg btn-floating float-right"
+        <button onclick="window.location.href='/customers/add'" type="button" class="btn btn-primary btn-lg btn-floating float-right"
         >
             <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
@@ -63,7 +60,13 @@
             <td th:text="${customer.nic}"></td>
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.phone}"></td>
-            <td><button type="button" class="btn btn-sm btn-outline-success"
+            <td><button type="button" class="btn btn-sm btn-outline-success open-EditDialog"
+                        th:data-id="${customer.id}"
+                        th:data-firstname="${customer.firstName}"
+                        th:data-lastname="${customer.lastName}"
+                        th:data-nic="${customer.nic}"
+                        th:data-email="${customer.email}"
+                        th:data-phone="${customer.phone}"
                         data-mdb-toggle="modal"
                         data-mdb-target="#editCustomerModal">Edit</button></td>
             <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
@@ -91,32 +94,9 @@
                         aria-label="Close"
                 ></button>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-outline mb-4">
-                        <input type="text" id="firstName" class="form-control" />
-                        <label class="form-label" for="firstName">First Name</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" id="LastName" class="form-control" />
-                        <label class="form-label" for="LastName">Last Name</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" id="nic" class="form-control" />
-                        <label class="form-label" for="nic">NIC</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="email" id="email" class="form-control" />
-                        <label class="form-label" for="email">Email</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" id="phone" class="form-control" />
-                        <label class="form-label" for="phone">Phone Number</label>
-                    </div>
-                </form>
-            </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add Subscription</button>
+
             </div>
         </div>
     </div>
@@ -152,8 +132,8 @@
                         <label class="form-label" for="firstName2">First Name</label>
                     </div>
                     <div class="form-outline mb-4">
-                        <input type="text" id="LastName2" class="form-control" />
-                        <label class="form-label" for="LastName2">Last Name</label>
+                        <input type="text" id="lastName2" class="form-control" />
+                        <label class="form-label" for="lastName2">Last Name</label>
                     </div>
                     <div class="form-outline mb-4">
                         <input type="text" id="nic2" class="form-control" />
@@ -181,6 +161,23 @@
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
 ></script>
+
+<script>
+    $(document).on("click", ".open-EditDialog", function () {
+        var id = $(this).data('id');
+        var firstName = $(this).data('firstname');
+        var lastName = $(this).data('lastname');
+        var nic = $(this).data('nic');
+        var email = $(this).data('email');
+        var phone = $(this).data('phone');
+        $(".modal-body #customerId").val(id);
+        $(".modal-body #firstName2").val(firstName);
+        $(".modal-body #lastName2").val(lastName);
+        $(".modal-body #nic2").val(nic);
+        $(".modal-body #email2").val(email);
+        $(".modal-body #phone2").val(phone);
+    });
+</script>
 
 </body>
 </html>

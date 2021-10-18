@@ -1,6 +1,9 @@
 package com.sandali.CustomerComplaintManagementSystem.models;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
@@ -9,11 +12,17 @@ public class Customer {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    @NonNull
     private String firstName;
+    @NonNull
     private String lastName;
+    @NonNull
     private String nic;
+    @NonNull
     private String phone;
+    @NonNull
     private String email;
+    @NonNull
     private Timestamp createdAt;
 
     public Customer() {
