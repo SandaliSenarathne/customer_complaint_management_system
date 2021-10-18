@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -20,7 +21,7 @@
             rel="stylesheet"
     />
 
-    <link href="../css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}" />
 </head>
 <body>
 <div class="sidebar">
@@ -35,7 +36,7 @@
     <div>
         <h1>Hello!</h1>
         <h3>Welcome to Customer Complaint Management System</h3>
-        <img src="../images/logo.png" width="300px">
+        <img th:src="@{/assets/images/logo.png}" width="300px">
     </div>
 </div>
 <!--Logo color - #f76f73 -->

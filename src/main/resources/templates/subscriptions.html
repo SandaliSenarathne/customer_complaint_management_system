@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Packages</title>
+    <title>Subscriptions</title>
 
     <!-- Font Awesome -->
     <link
@@ -20,23 +20,23 @@
             rel="stylesheet"
     />
 
-    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../static/assets/css/styles.css" rel="stylesheet">
 </head>
 <body>
 <div class="sidebar">
     <a href="/">Home</a>
     <a href="/complaints">Complaints</a>
     <a href="/customers">Customers</a>
-    <a href="/subscriptions">Subscriptions</a>
-    <a class="active" href="/packages">Packages</a>
+    <a class="active" href="/subscriptions">Subscriptions</a>
+    <a href="/packages">Packages</a>
 </div>
 
 <div class="content">
-    <h1>Packages</h1>
+    <h1>Subscriptions</h1>
     <div class="d-flex flex-row-reverse px-4 py-2">
     <button type="button"
             data-mdb-toggle="modal"
-            data-mdb-target="#addPackageModal"
+            data-mdb-target="#addSubscriptionModal"
             class="btn btn-primary btn-lg btn-floating float-right"
     >
         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -45,10 +45,11 @@
     <table class="table table-hover align-middle">
         <thead>
             <tr>
-                <th class="fw-bold">Package ID</th>
-                <th class="fw-bold">Package Name</th>
-                <th class="fw-bold">Description</th>
+                <th class="fw-bold">Subscription ID</th>
+                <th class="fw-bold">Customer</th>
+                <th class="fw-bold">Package</th>
                 <th class="fw-bold">Monthly Fee</th>
+                <th class="fw-bold">Status</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -56,27 +57,30 @@
         <tbody>
             <tr>
                 <td>1</td>
+                <td>Sandali Senarathne</td>
                 <td>Master Unlimited</td>
-                <td>Get unlimited calls to any network</td>
                 <td>3500 LKR</td>
+                <td><span class="badge bg-danger">Deactivated</span></td>
                 <td><button type="button" class="btn btn-sm btn-outline-success"
                             data-mdb-toggle="modal"
-                            data-mdb-target="#editPackageModal">Edit</button></td>
+                            data-mdb-target="#editSubscriptionModal">Edit</button></td>
                 <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>Data Blast</td>
-                <td>Get day time 20GB and night time 35GB</td>
+                <td>Sandali Senarathne</td>
+                <td>Master Unlimited</td>
                 <td>3500 LKR</td>
+                <td><span class="badge bg-primary">Active</span></td>
                 <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
                 <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
             </tr>
             <tr>
                 <td>3</td>
+                <td>Sandali Senarathne</td>
                 <td>Master Unlimited</td>
-                <td>Get unlimited calls to any network</td>
                 <td>3500 LKR</td>
+                <td><span class="badge bg-primary">Active</span></td>
                 <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
                 <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
             </tr>
@@ -87,15 +91,15 @@
 <!-- Add Modal -->
 <div
         class="modal fade"
-        id="addPackageModal"
+        id="addSubscriptionModal"
         tabindex="-1"
-        aria-labelledby="addPackageModal"
+        aria-labelledby="addSubscriptionModal"
         aria-hidden="true"
 >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addPackageModalTitle">Add Package</h5>
+                <h5 class="modal-title" id="addSubscriptionModalTitle">Add Subscription</h5>
                 <button
                         type="button"
                         class="btn-close"
@@ -105,22 +109,31 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-outline mb-4">
-                        <input type="text" id="packageName" class="form-control" />
-                        <label class="form-label" for="packageName">Package Name</label>
+                    <div class="form-group mb-3">
+                        <label for="customerId">Customer</label>
+                        <select class="form-control" id="customerId">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
                     </div>
-                    <div class="form-outline mb-4">
-                        <textarea class="form-control" id="desc" rows="4"></textarea>
-                        <label class="form-label" for="desc">Description</label>
+                    <div class="form-group mb-3">
+                        <label for="packageId">Package</label>
+                        <select class="form-control" id="packageId">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
                     </div>
-                    <div class="form-outline mb-4">
-                        <input type="number" id="monthlyFee" class="form-control" />
-                        <label class="form-label" for="monthlyFee">Monthly Fee</label>
-                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add Package</button>
+                <button type="button" class="btn btn-primary">Add Subscription</button>
             </div>
         </div>
     </div>
@@ -129,15 +142,15 @@
 <!-- Edit Modal -->
 <div
         class="modal fade"
-        id="editPackageModal"
+        id="editSubscriptionModal"
         tabindex="-1"
-        aria-labelledby="editPackageModal"
+        aria-labelledby="editSubscriptionModal"
         aria-hidden="true"
 >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editPackageModalTitle">Edit Package</h5>
+                <h5 class="modal-title" id="editSubscriptionModalTitle">Edit Subscription</h5>
                 <button
                         type="button"
                         class="btn-close"
@@ -147,21 +160,26 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-outline mb-4">
-                        <input type="text" id="packageId" class="form-control" value="1" disabled/>
-                        <label class="form-label" for="packageId">Package ID</label>
+                    <div class="form-outline">
+                        <input type="text" id="customerId2" class="form-control" value="Sandali Senarathne" disabled/>
+                        <label class="form-label" for="customerId2">Customer</label>
                     </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" id="packageName2" class="form-control" />
-                        <label class="form-label" for="packageName2">Package Name</label>
+                    <div class="form-group mb-3">
+                        <label for="packageId2">Package</label>
+                        <select class="form-control" id="packageId2">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
                     </div>
-                    <div class="form-outline mb-4">
-                        <textarea class="form-control" id="desc2" rows="4"></textarea>
-                        <label class="form-label" for="desc2">Description</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="number" id="monthlyFee2" class="form-control" />
-                        <label class="form-label" for="monthlyFee2">Monthly Fee</label>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status">
+                            <option class="text-primary" value="1">Activate</option>
+                            <option class="text-danger" value="0">deactivate</option>
+                        </select>
                     </div>
                 </form>
             </div>

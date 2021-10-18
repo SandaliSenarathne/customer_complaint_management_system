@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Complaints</title>
@@ -20,7 +20,7 @@
             rel="stylesheet"
     />
 
-    <link href="../css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}" />
 
 </head>
 <body>
@@ -58,28 +58,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>3</td>
-            <td>Sandali Senarathne</td>
-            <td>Data Blast</td>
-            <td>My internet connection is not working</td>
-            <td><span class="badge bg-danger">Pending</span></td>
-            <td>Not solved yet</td>
+        <tr th:each="complaint : ${listComplaints}">
+            <td th:text="${complaint.id}"></td>
+            <td th:text="${complaint.subscriptionId}">3</td>
+            <td th:text="${complaint.subscriptionId}">Sandali Senarathne</td>
+            <td th:text="${complaint.subscriptionId}">Data Blast</td>
+            <td th:text="${complaint.complaint}"></td>
+            <td><span class="badge bg-danger" th:text="${complaint.status}">Pending</span></td>
+            <td th:text="${complaint.solution}"></td>
             <td><button type="button" class="btn btn-sm btn-outline-success"
                         data-mdb-toggle="modal"
                         data-mdb-target="#editComplaintModal">Edit</button></td>
-            <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>1</td>
-            <td>Sandali Senarathne</td>
-            <td>Data Blast</td>
-            <td>My router is not working</td>
-            <td><span class="badge bg-success">Solved</span></td>
-            <td>Router was replaced</td>
-            <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
             <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
         </tr>
         </tbody>

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Customers</title>
@@ -20,7 +20,7 @@
             rel="stylesheet"
     />
 
-    <link href="../css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}" />
 </head>
 <body>
 <div class="sidebar">
@@ -56,36 +56,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>Sandali</td>
-            <td>Senarathne</td>
-            <td>987320125V</td>
-            <td>sandali@gmail.com</td>
-            <td>0719274111</td>
+        <tr th:each="customer : ${listCustomers}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.nic}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.phone}"></td>
             <td><button type="button" class="btn btn-sm btn-outline-success"
                         data-mdb-toggle="modal"
                         data-mdb-target="#editCustomerModal">Edit</button></td>
-            <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Sandali</td>
-            <td>Senarathne</td>
-            <td>987320125V</td>
-            <td>sandali@gmail.com</td>
-            <td>0719274111</td>
-            <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
-            <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Sandali</td>
-            <td>Senarathne</td>
-            <td>987320125V</td>
-            <td>sandali@gmail.com</td>
-            <td>0719274111</td>
-            <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
             <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
         </tr>
         </tbody>

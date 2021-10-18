@@ -3,16 +3,27 @@ package com.sandali.CustomerComplaintManagementSystem.controllers;
 import com.sandali.CustomerComplaintManagementSystem.models.Customer;
 import com.sandali.CustomerComplaintManagementSystem.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @GetMapping("")
+    public String viewComplaintsPage(Model model) {
+        List<Customer> listCustomers = this.getAllCustomers();
+        model.addAttribute("listCustomers", listCustomers);
+        return "customers";
+    }
+
     @GetMapping("/list")
-    public Iterable<Customer> getAllCustomers() {
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
