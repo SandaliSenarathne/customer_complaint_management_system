@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Subscriptions</title>
@@ -34,13 +34,10 @@
 <div class="content">
     <h1>Subscriptions</h1>
     <div class="d-flex flex-row-reverse px-4 py-2">
-    <button type="button"
-            data-mdb-toggle="modal"
-            data-mdb-target="#addSubscriptionModal"
-            class="btn btn-primary btn-lg btn-floating float-right"
-    >
-        <i class="fa fa-plus" aria-hidden="true"></i>
-    </button>
+        <button onclick="window.location.href='/subscriptions/add-form'" type="button" class="btn btn-primary btn-lg btn-floating float-right"
+        >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
     </div>
     <table class="table table-hover align-middle">
         <thead>
@@ -61,133 +58,13 @@
                 <td>Master Unlimited</td>
                 <td>3500 LKR</td>
                 <td><span class="badge bg-danger">Deactivated</span></td>
-                <td><button type="button" class="btn btn-sm btn-outline-success"
-                            data-mdb-toggle="modal"
-                            data-mdb-target="#editSubscriptionModal">Edit</button></td>
-                <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Sandali Senarathne</td>
-                <td>Master Unlimited</td>
-                <td>3500 LKR</td>
-                <td><span class="badge bg-primary">Active</span></td>
-                <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
-                <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Sandali Senarathne</td>
-                <td>Master Unlimited</td>
-                <td>3500 LKR</td>
-                <td><span class="badge bg-primary">Active</span></td>
-                <td><button type="button" class="btn btn-sm btn-outline-success">Edit</button></td>
-                <td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>
+<!--                <td><a th:href="@{'/subscriptions/edit-form/'+${customer.id}}" class="btn btn-sm btn-outline-success">Edit</a></td>-->
+<!--                <form th:action="@{'/subscriptions/delete/'+${customer.id}}" th:method="delete" >-->
+<!--                    <td><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></td>-->
+<!--                </form>-->
             </tr>
         </tbody>
     </table>
-</div>
-
-<!-- Add Modal -->
-<div
-        class="modal fade"
-        id="addSubscriptionModal"
-        tabindex="-1"
-        aria-labelledby="addSubscriptionModal"
-        aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addSubscriptionModalTitle">Add Subscription</h5>
-                <button
-                        type="button"
-                        class="btn-close"
-                        data-mdb-dismiss="modal"
-                        aria-label="Close"
-                ></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group mb-3">
-                        <label for="customerId">Customer</label>
-                        <select class="form-control" id="customerId">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="packageId">Package</label>
-                        <select class="form-control" id="packageId">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add Subscription</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Modal -->
-<div
-        class="modal fade"
-        id="editSubscriptionModal"
-        tabindex="-1"
-        aria-labelledby="editSubscriptionModal"
-        aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editSubscriptionModalTitle">Edit Subscription</h5>
-                <button
-                        type="button"
-                        class="btn-close"
-                        data-mdb-dismiss="modal"
-                        aria-label="Close"
-                ></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-outline">
-                        <input type="text" id="customerId2" class="form-control" value="Sandali Senarathne" disabled/>
-                        <label class="form-label" for="customerId2">Customer</label>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="packageId2">Package</label>
-                        <select class="form-control" id="packageId2">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select class="form-control" id="status">
-                            <option class="text-primary" value="1">Activate</option>
-                            <option class="text-danger" value="0">deactivate</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save Changes</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- MDB -->

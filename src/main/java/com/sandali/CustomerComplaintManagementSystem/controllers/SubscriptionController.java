@@ -1,20 +1,48 @@
 package com.sandali.CustomerComplaintManagementSystem.controllers;
 
+import com.sandali.CustomerComplaintManagementSystem.models.Customer;
 import com.sandali.CustomerComplaintManagementSystem.models.Package;
 import com.sandali.CustomerComplaintManagementSystem.models.Subscription;
 import com.sandali.CustomerComplaintManagementSystem.repository.PackageRepository;
 import com.sandali.CustomerComplaintManagementSystem.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequestMapping("/subscriptions")
 public class SubscriptionController {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
 
+    @GetMapping("")
+    public String viewSubscriptionsPage(Model model) {
+        List<Subscription> listSubscriptions = this.getAllSubscriptions();
+        model.addAttribute("listSubscriptions", listSubscriptions);
+        return "subscriptions";
+    }
+
+    @GetMapping("/add-form")
+    public String viewAddSubscriptionPage(Model model) {
+        Subscription subscription = new Subscription();
+        model.addAttribute("subscription", subscription);
+        return "add_subscription";
+    }
+
+    @GetMapping("/edit-form/{id}")
+    public String showEditSubscriptionPage(@PathVariable(name = "id") int id, Model model) {
+        Subscription subscription = subscriptionRepository.findSubscriptionById(id);
+        model.addAttribute("subscription", subscription);
+        return "edit_subscription";
+    }
+
+    //------------------------------------------------------------------------------------------------
+
     @GetMapping("/list")
-    public Iterable<Subscription> getAllSubscriptions() {
+    public List<Subscription> getAllSubscriptions() {
         return subscriptionRepository.findAll();
     }
 
@@ -24,31 +52,21 @@ public class SubscriptionController {
     }
 
     @PostMapping("/add")
-    public String addSubscription(@RequestParam Integer customerId,
-                              @RequestParam Integer packageId) {
-        Subscription subscription = new Subscription();
-        subscription.setCustomerId(customerId);
-        subscription.setPackageId(packageId);
-        subscription.setActive(true);
+    public String addSubscription(@ModelAttribute("subscription") Subscription subscription){
         subscriptionRepository.save(subscription);
-        return "Added new subscription successfully";
+        return "redirect:/subscriptions";
     }
 
-    @PutMapping("/edit/{id}")
-    public String editSubscription(@PathVariable Integer id, @RequestParam Integer customerId,
-                              @RequestParam Integer packageId, @RequestParam boolean isActive) {
-        Subscription subscription = this.findSubscriptionById(id);
-        subscription.setCustomerId(customerId);
-        subscription.setPackageId(packageId);
-        subscription.setActive(isActive);
+    @PutMapping("/edit")
+    public String editSubscription(@ModelAttribute("subscription") Subscription subscription) {
         subscriptionRepository.save(subscription);
-        return "Edited subscription successfully";
+        return "redirect:/subscriptions";
     }
 
     @DeleteMapping("/delete/{id}")
     private String deleteSubscription(@PathVariable Integer id) {
         subscriptionRepository.delete(this.findSubscriptionById(id));
-        return "Deleted subscription successfully";
+        return "redirect:/subscriptions";
     }
 
 }
