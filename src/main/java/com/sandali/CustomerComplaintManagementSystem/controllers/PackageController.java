@@ -1,6 +1,5 @@
 package com.sandali.CustomerComplaintManagementSystem.controllers;
 
-import com.sandali.CustomerComplaintManagementSystem.models.Customer;
 import com.sandali.CustomerComplaintManagementSystem.models.Package;
 import com.sandali.CustomerComplaintManagementSystem.repository.PackageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +22,21 @@ public class PackageController {
         return "packages";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add-form")
     public String viewAddPackagePage(Model model) {
         Package p = new Package();
         model.addAttribute("package", p);
-
         return "add_package";
     }
 
-    @PostMapping("/save")
-    public String savePackage(@ModelAttribute("package") Package p){
-        packageRepository.save(p);
-
-        return "redirect:/packages";
+    @GetMapping("/edit-form/{id}")
+    public String showEditPackagePage(@PathVariable(name = "id") int id, Model model) {
+        Package p = packageRepository.findPackageById(id);
+        model.addAttribute("p", p);
+        return "edit_package";
     }
+
+    //------------------------------------------------------------------------------------------------
 
     @GetMapping("/list")
     public List<Package> getAllPackages() {
@@ -48,10 +48,22 @@ public class PackageController {
         return packageRepository.findPackageById(id);
     }
 
+    @PostMapping("/add")
+    public String addPackage(@ModelAttribute("p") Package p){
+        packageRepository.save(p);
+        return "redirect:/packages";
+    }
+
+    @PutMapping("/edit")
+    public String editPackage(@ModelAttribute(value="p") Package p) {
+        packageRepository.save(p);
+        return "redirect:/packages";
+    }
+
     @DeleteMapping("/delete/{id}")
     private String deletePackage(@PathVariable Integer id) {
         packageRepository.delete(this.findPackageById(id));
-        return "Deleted package successfully";
+        return "redirect:/packages";
     }
 
 }

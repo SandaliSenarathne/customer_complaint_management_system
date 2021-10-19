@@ -2,7 +2,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Package</title>
+    <title>Edit Package</title>
 
     <!-- Font Awesome -->
     <link
@@ -30,22 +30,26 @@
     <div class="col-md-6">
         <div class="card border border-primary">
             <div class="card-body">
-                <h1 class="text-center">Add Package</h1>
-                <form action="#" th:action="@{/packages/add}" th:object="${package}" th:method="post">
+                <h1 class="text-center">Edit Package</h1>
+                <form action="#" th:action="@{/packages/edit}" th:object="${p}" th:method="put">
                     <div class="form-outline mb-4">
-                        <input type="text" id="packageName" class="form-control" th:field="*{packageName}" required/>
-                        <label class="form-label" for="packageName">Package Name</label>
+                        <input type="text" id="packageId" class="form-control" th:field="*{id}" readonly="readonly"/>
+                        <label class="form-label" for="packageId">Package ID</label>
                     </div>
                     <div class="form-outline mb-4">
-                        <textarea class="form-control" id="desc" rows="4"th:field="*{packageDesc}" required></textarea>
-                        <label class="form-label" for="desc">Description</label>
+                        <input type="text" id="packageName2" class="form-control"  th:field="*{packageName}" required/>
+                        <label class="form-label" for="packageName2">Package Name</label>
                     </div>
                     <div class="form-outline mb-4">
-                        <input type="number" id="monthlyFee" class="form-control" th:field="*{monthlyFee}" required/>
-                        <label class="form-label" for="monthlyFee">Monthly Fee</label>
+                        <textarea class="form-control" id="desc2" rows="4"  th:field="*{packageDesc}" required></textarea>
+                        <label class="form-label" for="desc2">Description</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="number" id="monthlyFee2" class="form-control"  th:field="*{monthlyFee}" required/>
+                        <label class="form-label" for="monthlyFee2">Monthly Fee</label>
                     </div>
                     <div class="d-flex flex-row-reverse">
-                        <button type="submit" class="btn btn-primary">Add Package</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
             </div>

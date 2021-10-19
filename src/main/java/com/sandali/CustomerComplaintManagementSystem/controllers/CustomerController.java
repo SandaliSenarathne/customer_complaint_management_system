@@ -43,7 +43,6 @@ public class CustomerController {
     @PostMapping("/save")
     public String saveCustomer(@ModelAttribute("customer") Customer customer){
         customerRepository.save(customer);
-
         return "redirect:/customers";
     }
 
