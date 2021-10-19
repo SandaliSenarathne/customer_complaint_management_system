@@ -31,10 +31,9 @@
         <div class="card border border-primary">
             <div class="card-body">
                 <h1 class="text-center">Edit Customer</h1>
-                <form action="#" th:action="@{/customers/save}" th:object="${customer}"
-                      method="post">
+                <form action="#" th:action="@{/customers/edit}" th:object="${customer}" th:method="put">
                     <div class="form-outline mb-4">
-                        <input type="text" id="id" class="form-control" th:field="*{id}" required/>
+                        <input type="text" id="id" class="form-control" th:field="*{id}" readonly="readonly"/>
                         <label class="form-label" for="id">Customer ID</label>
                     </div>
                     <div class="form-outline mb-4">

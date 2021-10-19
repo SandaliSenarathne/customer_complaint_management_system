@@ -1,6 +1,7 @@
 package com.sandali.CustomerComplaintManagementSystem.controllers;
 
 import com.sandali.CustomerComplaintManagementSystem.models.Customer;
+import com.sandali.CustomerComplaintManagementSystem.models.Package;
 import com.sandali.CustomerComplaintManagementSystem.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class CustomerController {
         return "customers";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add-form")
     public String viewAddCustomerPage(Model model) {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
@@ -31,20 +32,14 @@ public class CustomerController {
         return "add_customer";
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEditCustomerPage(@PathVariable(name = "id") int id) {
-        ModelAndView mav = new ModelAndView("edit_customer");
+    @GetMapping("/edit-form/{id}")
+    public String showEditCustomerPage(@PathVariable(name = "id") int id, Model model) {
         Customer customer = customerRepository.findCustomerById(id);
-        mav.addObject("customer", customer);
-
-        return mav;
+        model.addAttribute("customer", customer);
+        return "edit_customer";
     }
 
-    @PostMapping("/save")
-    public String saveCustomer(@ModelAttribute("customer") Customer customer){
-        customerRepository.save(customer);
-        return "redirect:/customers";
-    }
+    //------------------------------------------------------------------------------------------------
 
     @GetMapping("/list")
     public List<Customer> getAllCustomers() {
@@ -56,7 +51,19 @@ public class CustomerController {
         return customerRepository.findCustomerById(id);
     }
 
-    @RequestMapping("/delete/{id}")
+    @PostMapping("/add")
+    public String addPackage(@ModelAttribute("customer") Customer customer){
+        customerRepository.save(customer);
+        return "redirect:/customers";
+    }
+
+    @PutMapping("/edit")
+    public String editPackage(@ModelAttribute(value="customer") Customer customer) {
+        customerRepository.save(customer);
+        return "redirect:/customers";
+    }
+
+    @DeleteMapping("/delete/{id}")
     private String deleteCustomer(@PathVariable Integer id) {
         customerRepository.delete(this.findCustomerById(id));
         return "redirect:/customers";

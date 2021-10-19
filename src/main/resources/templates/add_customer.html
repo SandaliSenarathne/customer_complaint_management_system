@@ -31,8 +31,7 @@
         <div class="card border border-primary">
             <div class="card-body">
                 <h1 class="text-center">Add Customer</h1>
-                <form action="#" th:action="@{/customers/save}" th:object="${customer}"
-                      method="post">
+                <form action="#" th:action="@{/customers/add}" th:object="${customer}" th:method="post">
                     <div class="form-outline mb-4">
                         <input type="text" id="firstName" class="form-control" th:field="*{firstName}" required/>
                         <label class="form-label" for="firstName">First Name</label>

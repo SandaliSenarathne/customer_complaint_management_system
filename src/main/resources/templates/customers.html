@@ -34,7 +34,7 @@
 <div class="content">
     <h1>Customers</h1>
     <div class="d-flex flex-row-reverse px-4 py-2">
-        <button onclick="window.location.href='/customers/add'" type="button" class="btn btn-primary btn-lg btn-floating float-right"
+        <button onclick="window.location.href='/customers/add-form'" type="button" class="btn btn-primary btn-lg btn-floating float-right"
         >
             <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
@@ -60,8 +60,10 @@
             <td th:text="${customer.nic}"></td>
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.phone}"></td>
-            <td><a th:href="@{'/customers/edit/'+${customer.id}}" class="btn btn-sm btn-outline-success">Edit</a></td>
-            <td><a th:href="@{'/customers/delete/'+${customer.id}}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+            <td><a th:href="@{'/customers/edit-form/'+${customer.id}}" class="btn btn-sm btn-outline-success">Edit</a></td>
+            <form th:action="@{'/customers/delete/'+${customer.id}}" th:method="delete" >
+                <td><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></td>
+            </form>
         </tr>
         </tbody>
     </table>
