@@ -32,25 +32,21 @@
             <div class="card-body">
                 <h1 class="text-center">Edit Subscription</h1>
                 <form action="#" th:action="@{/subscriptions/edit}" th:object="${subscription}" th:method="put">
-                    <div class="form-outline">
+                    <div class="form-outline mb-3">
                         <input type="text" id="subscriptionId" class="form-control" th:field="*{id}" readonly="readonly"/>
                         <label class="form-label" for="subscriptionId">Subscription ID</label>
                     </div>
-                    <div class="form-outline">
-                        <input type="text" id="customerId2" class="form-control" th:field="*{customerId}" readonly="readonly"/>
+                    <div class="form-outline mb-3">
+                        <input type="text" id="customerId2" class="form-control" th:field="*{customer}" readonly="readonly"/>
                         <label class="form-label" for="customerId2">Customer</label>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="packageId2">Package</label>
-                        <select class="form-control" id="packageId2" th:field="*{packageId}">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <label for="packageId">Package</label>
+                        <select class="form-control" id="packageId" th:field="*{pkg}">
+                            <option th:each="p : ${listPackages}" th:value="${p.id}" th:text="${p.id}+' '+${p.packageName}"></option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="status">Status</label>
                         <select class="form-control" id="status" th:field="*{active}">
                             <option class="text-primary" value="1">Activate</option>

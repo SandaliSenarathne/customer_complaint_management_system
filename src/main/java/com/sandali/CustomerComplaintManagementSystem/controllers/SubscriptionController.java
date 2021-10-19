@@ -3,6 +3,7 @@ package com.sandali.CustomerComplaintManagementSystem.controllers;
 import com.sandali.CustomerComplaintManagementSystem.models.Customer;
 import com.sandali.CustomerComplaintManagementSystem.models.Package;
 import com.sandali.CustomerComplaintManagementSystem.models.Subscription;
+import com.sandali.CustomerComplaintManagementSystem.repository.CustomerRepository;
 import com.sandali.CustomerComplaintManagementSystem.repository.PackageRepository;
 import com.sandali.CustomerComplaintManagementSystem.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ import java.util.List;
 public class SubscriptionController {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private PackageRepository packageRepository;
 
     @GetMapping("")
     public String viewSubscriptionsPage(Model model) {
@@ -29,6 +34,8 @@ public class SubscriptionController {
     public String viewAddSubscriptionPage(Model model) {
         Subscription subscription = new Subscription();
         model.addAttribute("subscription", subscription);
+        model.addAttribute("listCustomers", customerRepository.findAll());
+        model.addAttribute("listPackages", packageRepository.findAll());
         return "add_subscription";
     }
 
@@ -36,6 +43,7 @@ public class SubscriptionController {
     public String showEditSubscriptionPage(@PathVariable(name = "id") int id, Model model) {
         Subscription subscription = subscriptionRepository.findSubscriptionById(id);
         model.addAttribute("subscription", subscription);
+        model.addAttribute("listPackages", packageRepository.findAll());
         return "edit_subscription";
     }
 

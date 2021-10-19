@@ -1,9 +1,11 @@
 package com.sandali.CustomerComplaintManagementSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "package")
@@ -20,15 +22,20 @@ public class Package {
     @NonNull
     private Timestamp createdAt;
 
+    @OneToMany(targetEntity = Subscription.class, mappedBy = "pkg",  cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Subscription> subscriptions;
+
     public Package() {
     }
 
-    public Package(Integer id, String packageName, String packageDesc, int monthlyFee, Timestamp createdAt) {
+    public Package(Integer id, @NonNull String packageName, @NonNull String packageDesc, int monthlyFee, @NonNull Timestamp createdAt, Set<Subscription> subscriptions) {
         this.id = id;
         this.packageName = packageName;
         this.packageDesc = packageDesc;
         this.monthlyFee = monthlyFee;
         this.createdAt = createdAt;
+        this.subscriptions = subscriptions;
     }
 
     public Integer getId() {
@@ -39,19 +46,21 @@ public class Package {
         this.id = id;
     }
 
+    @NonNull
     public String getPackageName() {
         return packageName;
     }
 
-    public void setPackageName(String packageName) {
+    public void setPackageName(@NonNull String packageName) {
         this.packageName = packageName;
     }
 
+    @NonNull
     public String getPackageDesc() {
         return packageDesc;
     }
 
-    public void setPackageDesc(String packageDesc) {
+    public void setPackageDesc(@NonNull String packageDesc) {
         this.packageDesc = packageDesc;
     }
 
@@ -63,11 +72,20 @@ public class Package {
         this.monthlyFee = monthlyFee;
     }
 
+    @NonNull
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(@NonNull Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Set<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Set<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 }

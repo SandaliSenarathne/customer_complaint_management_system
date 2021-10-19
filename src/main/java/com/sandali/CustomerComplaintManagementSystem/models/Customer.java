@@ -1,10 +1,12 @@
 package com.sandali.CustomerComplaintManagementSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -25,10 +27,14 @@ public class Customer {
     @NonNull
     private Timestamp createdAt;
 
+    @OneToMany(targetEntity = Subscription.class,mappedBy = "customer",  cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Subscription> subscriptions;
+
     public Customer() {
     }
 
-    public Customer(Integer id, String firstName, String lastName, String nic, String phone, String email, Timestamp createdAt) {
+    public Customer(Integer id, @NonNull String firstName, @NonNull String lastName, @NonNull String nic, @NonNull String phone, @NonNull String email, @NonNull Timestamp createdAt, Set<Subscription> subscriptions) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,6 +42,7 @@ public class Customer {
         this.phone = phone;
         this.email = email;
         this.createdAt = createdAt;
+        this.subscriptions = subscriptions;
     }
 
     public Integer getId() {
@@ -46,51 +53,65 @@ public class Customer {
         this.id = id;
     }
 
+    @NonNull
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(@NonNull String firstName) {
         this.firstName = firstName;
     }
 
+    @NonNull
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(@NonNull String lastName) {
         this.lastName = lastName;
     }
 
+    @NonNull
     public String getNic() {
         return nic;
     }
 
-    public void setNic(String nic) {
+    public void setNic(@NonNull String nic) {
         this.nic = nic;
     }
 
+    @NonNull
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(@NonNull String phone) {
         this.phone = phone;
     }
 
+    @NonNull
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NonNull String email) {
         this.email = email;
     }
 
+    @NonNull
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(@NonNull Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Set<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Set<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 }

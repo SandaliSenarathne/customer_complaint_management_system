@@ -20,7 +20,7 @@
             rel="stylesheet"
     />
 
-    <link href="../static/assets/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}" />
 </head>
 <body>
 <div class="sidebar">
@@ -52,16 +52,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Sandali Senarathne</td>
-                <td>Master Unlimited</td>
-                <td>3500 LKR</td>
-                <td><span class="badge bg-danger">Deactivated</span></td>
-<!--                <td><a th:href="@{'/subscriptions/edit-form/'+${customer.id}}" class="btn btn-sm btn-outline-success">Edit</a></td>-->
-<!--                <form th:action="@{'/subscriptions/delete/'+${customer.id}}" th:method="delete" >-->
-<!--                    <td><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></td>-->
-<!--                </form>-->
+            <tr th:each="subscription : ${listSubscriptions}">
+                <td th:text="${subscription.id}"></td>
+                <td th:text="${subscription.getCustomer().getFirstName()}+' '+${subscription.getCustomer().getLastName()}"></td>
+                <td th:text="${subscription.getPkg().getPackageName()}"></td>
+                <td th:text="${subscription.getPkg().getMonthlyFee()}"></td>
+                <td><span th:class="${subscription.isActive()} ? 'badge bg-primary': 'badge bg-danger'" th:text="${subscription.isActive()} ? 'Active': 'Deactivated'"></span></td>
+                <td><a th:href="@{'/subscriptions/edit-form/'+${subscription.id}}" class="btn btn-sm btn-outline-success">Edit</a></td>
+                <form th:action="@{'/subscriptions/delete/'+${subscription.id}}" th:method="delete" >
+                    <td><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></td>
+                </form>
             </tr>
         </tbody>
     </table>

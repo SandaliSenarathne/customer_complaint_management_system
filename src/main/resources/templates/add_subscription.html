@@ -32,28 +32,18 @@
             <div class="card-body">
                 <h1 class="text-center">Add Subscription</h1>
                 <form action="#" th:action="@{/subscriptions/add}" th:object="${subscription}" th:method="post">
-                    <div class="form-outline mb-4">
-                        <input type="text" id="firstName" class="form-control" required/>
-                        <label class="form-label" for="firstName">First Name</label>
-                    </div>
                     <div class="form-group mb-3">
                         <label for="customerId">Customer</label>
-                        <select class="form-control" id="customerId" th:field="*{customerId}">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select class="form-control" id="customerId" th:field="*{customer}">
+                            <option disabled="disabled" value="0" selected>-- Customer --</option>
+                            <option th:each="customer : ${listCustomers}" th:value="${customer.id}" th:text="${customer.id}+' '+${customer.firstName}"></option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
                         <label for="packageId">Package</label>
-                        <select class="form-control" id="packageId" th:field="*{packageId}">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select class="form-control" id="packageId" th:field="*{pkg}">
+                            <option disabled="disabled" value="0" selected>-- Package --</option>
+                            <option th:each="p : ${listPackages}" th:value="${p.id}" th:text="${p.id}+' '+${p.packageName}"></option>
                         </select>
                     </div>
                     <div class="d-flex flex-row-reverse">
