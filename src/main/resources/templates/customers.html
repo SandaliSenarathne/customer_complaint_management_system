@@ -61,7 +61,7 @@
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.phone}"></td>
             <td><a th:href="@{'/customers/edit/'+${customer.id}}" class="btn btn-sm btn-outline-success">Edit</a></td>
-            <td><a  class="btn btn-sm btn-outline-danger">Delete</a></td>
+            <td><a th:href="@{'/customers/delete/'+${customer.id}}" class="btn btn-sm btn-outline-danger">Delete</a></td>
         </tr>
         </tbody>
     </table>
@@ -72,23 +72,6 @@
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
 ></script>
-
-<script>
-    $(document).on("click", ".open-EditDialog", function () {
-        var id = $(this).data('id');
-        var firstName = $(this).data('firstname');
-        var lastName = $(this).data('lastname');
-        var nic = $(this).data('nic');
-        var email = $(this).data('email');
-        var phone = $(this).data('phone');
-        $(".modal-body #customerId").val(id);
-        $(".modal-body #firstName2").val(firstName);
-        $(".modal-body #lastName2").val(lastName);
-        $(".modal-body #nic2").val(nic);
-        $(".modal-body #email2").val(email);
-        $(".modal-body #phone2").val(phone);
-    });
-</script>
 
 </body>
 </html>

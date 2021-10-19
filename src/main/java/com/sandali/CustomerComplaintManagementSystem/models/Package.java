@@ -1,5 +1,7 @@
 package com.sandali.CustomerComplaintManagementSystem.models;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -9,9 +11,13 @@ public class Package {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    @NonNull
     private String packageName;
+    @NonNull
     private String packageDesc;
+    @NonNull
     private int monthlyFee;
+    @NonNull
     private Timestamp createdAt;
 
     public Package() {
