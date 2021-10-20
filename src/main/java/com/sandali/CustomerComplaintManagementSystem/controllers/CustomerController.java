@@ -1,18 +1,48 @@
 package com.sandali.CustomerComplaintManagementSystem.controllers;
 
 import com.sandali.CustomerComplaintManagementSystem.models.Customer;
+import com.sandali.CustomerComplaintManagementSystem.models.Package;
 import com.sandali.CustomerComplaintManagementSystem.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @GetMapping("")
+    public String viewCustomersPage(Model model) {
+        List<Customer> listCustomers = this.getAllCustomers();
+        model.addAttribute("listCustomers", listCustomers);
+        return "customers";
+    }
+
+    @GetMapping("/add-form")
+    public String viewAddCustomerPage(Model model) {
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+
+        return "add_customer";
+    }
+
+    @GetMapping("/edit-form/{id}")
+    public String showEditCustomerPage(@PathVariable(name = "id") int id, Model model) {
+        Customer customer = customerRepository.findCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "edit_customer";
+    }
+
+    //------------------------------------------------------------------------------------------------
+
     @GetMapping("/list")
-    public Iterable<Customer> getAllCustomers() {
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
@@ -22,38 +52,21 @@ public class CustomerController {
     }
 
     @PostMapping("/add")
-    public String addCustomer(@RequestParam String firstName,
-                              @RequestParam String lastName, @RequestParam String nic,
-                              @RequestParam String phone, @RequestParam String email) {
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setNic(nic);
-        customer.setPhone(phone);
-        customer.setEmail(email);
+    public String addPackage(@ModelAttribute("customer") Customer customer){
         customerRepository.save(customer);
-        return "Added new customer successfully";
+        return "redirect:/customers";
     }
 
-    @PutMapping("/edit/{id}")
-    public String editCustomer(@PathVariable Integer id, @RequestParam String firstName,
-                               @RequestParam String lastName, @RequestParam String nic,
-                               @RequestParam String phone, @RequestParam String email) {
-        Customer customer = this.findCustomerById(id);
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setNic(nic);
-        customer.setPhone(phone);
-        customer.setEmail(email);
+    @PutMapping("/edit")
+    public String editPackage(@ModelAttribute(value="customer") Customer customer) {
         customerRepository.save(customer);
-        return "Edited customer successfully";
+        return "redirect:/customers";
     }
 
     @DeleteMapping("/delete/{id}")
-    private String deleteCustomer(@PathVariable Integer id)
-    {
+    private String deleteCustomer(@PathVariable Integer id) {
         customerRepository.delete(this.findCustomerById(id));
-        return "Deleted package successfully";
+        return "redirect:/customers";
     }
 
 }

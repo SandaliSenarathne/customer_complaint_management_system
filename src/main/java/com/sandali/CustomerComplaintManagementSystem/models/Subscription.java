@@ -1,9 +1,11 @@
 package com.sandali.CustomerComplaintManagementSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "subscription")
@@ -11,22 +13,32 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+
+    @ManyToOne
+    @JsonIgnore
+    private Customer customer;
+
+    @ManyToOne
+    @JsonIgnore
+    private Package pkg;
+
     @NonNull
-    private Integer customerId;
-    @NonNull
-    private Integer PackageId;
-    @NonNull
-    private boolean isActive;
+    private boolean isActive = true;
+
     @NonNull
     private Timestamp createdAt;
+
+    @OneToMany(targetEntity = Complaint.class,mappedBy = "subscription",  cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Complaint> complaints;
 
     public Subscription() {
     }
 
-    public Subscription(Integer id, Integer customerId, Integer packageId, boolean isActive, Timestamp createdAt) {
+    public Subscription(Integer id, Customer customer, Package pkg, boolean isActive, @NonNull Timestamp createdAt) {
         this.id = id;
-        this.customerId = customerId;
-        PackageId = packageId;
+        this.customer = customer;
+        this.pkg = pkg;
         this.isActive = isActive;
         this.createdAt = createdAt;
     }
@@ -39,20 +51,20 @@ public class Subscription {
         this.id = id;
     }
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Integer getPackageId() {
-        return PackageId;
+    public Package getPkg() {
+        return pkg;
     }
 
-    public void setPackageId(Integer packageId) {
-        PackageId = packageId;
+    public void setPkg(Package pkg) {
+        this.pkg = pkg;
     }
 
     public boolean isActive() {
@@ -63,11 +75,12 @@ public class Subscription {
         isActive = active;
     }
 
+    @NonNull
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(@NonNull Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }
