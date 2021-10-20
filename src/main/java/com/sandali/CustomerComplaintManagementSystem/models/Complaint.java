@@ -1,5 +1,6 @@
 package com.sandali.CustomerComplaintManagementSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hamcrest.Condition;
 import org.springframework.lang.NonNull;
 
@@ -12,19 +13,25 @@ public class Complaint {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private Integer subscriptionId;
-    private String complaint;
+    @ManyToOne
+    @JsonIgnore
+    private Subscription subscription;
+    @NonNull
+    private String complaintText;
+    @NonNull
     private String solution;
-    private int status; // 0 - Pending, 1 - Solved
-    private Timestamp createdAt;
+    @NonNull
+    private int status = 0;
+    @NonNull
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     public Complaint() {
     }
 
-    public Complaint(Integer id, Integer subscriptionId, String complaint, String solution, int status, Timestamp createdAt) {
+    public Complaint(Integer id, Subscription subscription, @NonNull String complaintText, @NonNull String solution, int status, @NonNull Timestamp createdAt) {
         this.id = id;
-        this.subscriptionId = subscriptionId;
-        this.complaint = complaint;
+        this.subscription = subscription;
+        this.complaintText = complaintText;
         this.solution = solution;
         this.status = status;
         this.createdAt = createdAt;
@@ -38,27 +45,29 @@ public class Complaint {
         this.id = id;
     }
 
-    public Integer getSubscriptionId() {
-        return subscriptionId;
+    public Subscription getSubscription() {
+        return subscription;
     }
 
-    public void setSubscriptionId(Integer subscriptionId) {
-        this.subscriptionId = subscriptionId;
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
     }
 
-    public String getComplaint() {
-        return complaint;
+    @NonNull
+    public String getComplaintText() {
+        return complaintText;
     }
 
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
+    public void setComplaintText(@NonNull String complaintText) {
+        this.complaintText = complaintText;
     }
 
+    @NonNull
     public String getSolution() {
         return solution;
     }
 
-    public void setSolution(String solution) {
+    public void setSolution(@NonNull String solution) {
         this.solution = solution;
     }
 
@@ -70,11 +79,12 @@ public class Complaint {
         this.status = status;
     }
 
+    @NonNull
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(@NonNull Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }

@@ -5,6 +5,7 @@ import com.sandali.CustomerComplaintManagementSystem.models.Customer;
 import com.sandali.CustomerComplaintManagementSystem.models.Subscription;
 import com.sandali.CustomerComplaintManagementSystem.repository.ComplaintRepository;
 import com.sandali.CustomerComplaintManagementSystem.repository.CustomerRepository;
+import com.sandali.CustomerComplaintManagementSystem.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ import java.util.List;
 public class ComplaintController {
     @Autowired
     private ComplaintRepository complaintRepository;
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
 
     @GetMapping("")
     public String viewComplaintsPage(Model model) {
@@ -29,6 +32,7 @@ public class ComplaintController {
     public String viewAddComplaintPage(Model model) {
         Complaint complaint = new Complaint();
         model.addAttribute("complaint", complaint);
+        model.addAttribute("listSubscriptions", subscriptionRepository.findAll());
         return "add_complaint";
     }
 

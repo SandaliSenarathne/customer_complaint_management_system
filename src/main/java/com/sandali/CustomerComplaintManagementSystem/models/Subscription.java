@@ -5,6 +5,7 @@ import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "subscription")
@@ -26,6 +27,10 @@ public class Subscription {
 
     @NonNull
     private Timestamp createdAt;
+
+    @OneToMany(targetEntity = Complaint.class,mappedBy = "subscription",  cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Complaint> complaints;
 
     public Subscription() {
     }
