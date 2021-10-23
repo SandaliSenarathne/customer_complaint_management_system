@@ -26,7 +26,7 @@ public class Subscription {
     private boolean isActive = true;
 
     @NonNull
-    private Timestamp createdAt;
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     @OneToMany(targetEntity = Complaint.class,mappedBy = "subscription",  cascade = CascadeType.ALL)
     @JsonIgnore

@@ -20,7 +20,7 @@ public class Package {
     @NonNull
     private int monthlyFee;
     @NonNull
-    private Timestamp createdAt;
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     @OneToMany(targetEntity = Subscription.class, mappedBy = "pkg",  cascade = CascadeType.ALL)
     @JsonIgnore

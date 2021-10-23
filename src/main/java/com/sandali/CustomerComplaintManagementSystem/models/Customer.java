@@ -25,7 +25,7 @@ public class Customer {
     @NonNull
     private String email;
     @NonNull
-    private Timestamp createdAt;
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     @OneToMany(targetEntity = Subscription.class,mappedBy = "customer",  cascade = CascadeType.ALL)
     @JsonIgnore
